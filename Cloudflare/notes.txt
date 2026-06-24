@@ -1,0 +1,16 @@
+#   - dua nameserver Cloudflare
+
+melissa.ns.cloudflare.com
+randall.ns.cloudflare.com
+
+#   - URL pages.dev portfolio awam dari GitHub + custom domain
+
+www.profolio.fareezizzudinothman.com
+private-site-2ns.pages.dev
+
+
+#   - URL private-site custom subdomain
+
+www.profolio.fareezizzudinothman.com
+
+
