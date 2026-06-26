@@ -14,3 +14,12 @@ private-site-2ns.pages.dev
 www.profolio.fareezizzudinothman.com
 
 
+Cloudflare sesi 2:
+
+1. Sedia kan server nginx di EC2 dan setup domain ke elastic ip
+
+2. Bezakan kesan Proxied vs DNS onlu secara langsung
+
+3. Dedahkan service private ke internet guna Cloudflare Tunnel.
+
+Https://tunnel.fareezizzudinothman.com
