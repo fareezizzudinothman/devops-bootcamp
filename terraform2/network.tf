@@ -37,6 +37,7 @@ resource "aws_route_table_association" "my_link" {
   route_table_id = aws_route_table.my_route_table.id
 }
 
+#private subnet
 
 resource "aws_subnet" "my_private_subnet" {
   vpc_id            = aws_vpc.my_vpc.id
