@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Card - Fareez IO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #3b0404, #15030a 70%, #0a0206);
+      font-family: system-ui, sans-serif;
+      color: #f1f5f9;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 70px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 70px),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 70px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 70px);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: repeating-conic-gradient(from 0deg at 0 0, rgba(255, 255, 255, 0.08) 0 1deg, transparent 1deg 20deg);
+      mask-image: linear-gradient(to bottom right, black, transparent 65%);
+      pointer-events: none;
+    }
+
+    .spider-wrap {
+      position: fixed;
+      top: 0;
+      left: 16%;
+      z-index: 1;
+      transform-origin: top center;
+      animation: sway 5s ease-in-out infinite;
+    }
+
+    .spider-thread {
+      width: 2px;
+      height: 30vh;
+      margin: 0 auto;
+      background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.15));
+    }
+
+    .spider {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Cg%20stroke='%23f8fafc'%20stroke-width='6'%20stroke-linecap='round'%20fill='none'%3E%3Cpath%20d='M44%2045%20C30%2035%2020%2028%2010%2030'/%3E%3Cpath%20d='M56%2045%20C70%2035%2080%2028%2090%2030'/%3E%3Cpath%20d='M42%2052%20C26%2050%2016%2046%208%2050'/%3E%3Cpath%20d='M58%2052%20C74%2050%2084%2046%2092%2050'/%3E%3Cpath%20d='M44%2062%20C28%2066%2018%2072%2010%2078'/%3E%3Cpath%20d='M56%2062%20C72%2066%2082%2072%2090%2078'/%3E%3Cpath%20d='M46%2070%20C32%2078%2022%2084%2014%2090'/%3E%3Cpath%20d='M54%2070%20C68%2078%2078%2084%2086%2090'/%3E%3C/g%3E%3Cellipse%20cx='50'%20cy='62'%20rx='13'%20ry='17'%20fill='%23e11d48'/%3E%3Ccircle%20cx='50'%20cy='38'%20r='8'%20fill='%23e11d48'/%3E%3C/svg%3E") no-repeat center / contain;
+      filter: drop-shadow(0 0 8px rgba(225, 29, 72, 0.6));
+      animation: crawl 8s ease-in-out infinite;
+    }
+
+    .card {
+      position: relative;
+      background: linear-gradient(145deg, #1f2937, #111827);
+      padding: 2.5rem 3rem;
+      border-radius: 20px;
+      border: 2px solid #e11d48;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(225, 29, 72, 0.3);
+      text-align: center;
+      animation: fadeIn 1s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(56, 189, 248, 0.4);
+      border-color: #38bdf8;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: linear-gradient(135deg, #e11d48, #b91c1c);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .badge::before { content: "⚔ "; }
+    .badge::after { content: " ⚔"; }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e11d48, #38bdf8);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    }
+
+    h1 { font-size: 1.8rem; margin-bottom: 0.25rem; color: #fff; }
+
+    .cohort { color: #94a3b8; margin-bottom: 1rem; }
+
+    .role { color: #38bdf8; font-weight: 700; letter-spacing: 0.05em; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(10deg); }
+      50% { transform: rotate(-10deg); }
+    }
+
+    @keyframes crawl {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(20px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="spider-wrap">
+    <div class="spider-thread"></div>
+    <div class="spider"></div>
+  </div>
+  <div class="card">
+    <div class="logo">A</div>
+    <div class="badge">DevOps Bootcamp 2026</div>
+    <h1>Fareez IO</h1>
+    <p class="cohort">Cohort 1</p>
+    <p class="role">IT Engineer</p>
+  </div>
+</body>
+</html>
